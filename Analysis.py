@@ -80,6 +80,12 @@ def cal_accuracy(y_test, y_pred):
     print("Report : ",
     classification_report(y_test, y_pred))
   
+
+def bayesian():
+    #TODO
+    return 0
+
+
 # Driver code
 def main():
       
