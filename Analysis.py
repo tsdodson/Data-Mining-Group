@@ -5,6 +5,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import classification_report
+from sklearn.naive_bayes import GaussianNB
+
 import os
   
 # Function importing Dataset
@@ -81,9 +83,10 @@ def cal_accuracy(y_test, y_pred):
     classification_report(y_test, y_pred))
   
 
-def bayesian():
-    #TODO
-    return 0
+def train_using_bayesian(X_train, X_test, y_train):
+    bayesian_classifier = GaussianNB()
+    bayesian_classifier.fit(X_train, y_train)
+    return bayesian_classifier
 
 
 # Driver code
@@ -94,6 +97,8 @@ def main():
     X, Y, X_train, X_test, y_train, y_test = splitdataset(data)
     clf_gini = train_using_gini(X_train, X_test, y_train)
     clf_entropy = tarin_using_entropy(X_train, X_test, y_train)
+    clf_bayesian = train_using_bayesian(X_train, X_test, y_train)
+
       
     # Operational Phase
     print("Results Using Gini Index:")
@@ -101,13 +106,17 @@ def main():
     # Prediction using gini
     y_pred_gini = prediction(X_test, clf_gini)
     cal_accuracy(y_test, y_pred_gini)
-      
+    
     print("Results Using Entropy:")
     # Prediction using entropy
     y_pred_entropy = prediction(X_test, clf_entropy)
     cal_accuracy(y_test, y_pred_entropy)
       
-      
+    print("Results Using Bayesian:")
+    # Prediction using bayesian
+    y_pred_bayesian = prediction(X_test, clf_bayesian)
+    cal_accuracy(y_test, y_pred_bayesian)
+
 # Calling main function
 if __name__=="__main__":
     main()
